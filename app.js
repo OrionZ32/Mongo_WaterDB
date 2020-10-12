@@ -1,37 +1,52 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/waterDB", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost:27017/waterDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-const waterSchema = new mongoose.Schema ({
+const waterSchema = new mongoose.Schema({
   name: String,
   rating: Number,
-  review: String
+  review: String,
 });
 
 const Water = mongoose.model("Water", waterSchema);
 
-const life = new Water ({
+const life = new Water({
   name: "Life",
   rating: 8,
-  review: "Really good water"
+  review: "Really good water",
 });
 
-const ozark = new Water ({
+const ozark = new Water({
   name: "Ozark",
   rating: 6,
-  review: "Decent water"
+  review: "Decent water",
 });
 
-const core = new Water ({
+const core = new Water({
   name: "Core",
   rating: 9,
-  review: "The water is amazing"
+  review: "The water is amazing",
 });
 
-Water.insertMany([life, ozark, core], function(err) {
+// Water.insertMany([life, ozark, core], function (err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Saved all waters to waterDB");
+//   }
+// });
+
+Water.find(function (err, waters) {
   if (err) {
     console.log(err);
   } else {
-    console.log("Saved all waters to waterDB");
+    mongoose.connection.close();
+
+    waters.forEach(function (water) {
+      console.log(water.name);
+    });
   }
 });
