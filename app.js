@@ -40,14 +40,22 @@ Water.find(function (err, waters) {
   }
 });
 
-Water.updateOne(
-  { _id: "5f8b16e2eb32fa2484d6c09c" },
-  { name: "Nestle" },
-  function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Successfully updated the document");
-    }
+// Water.updateOne(
+//   { _id: "5f8b16e2eb32fa2484d6c09c" },
+//   { name: "Nestle" },
+//   function (err) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Successfully updated the document");
+//     }
+//   }
+// );
+
+Water.deleteOne({ _id: "5f8b16e2eb32fa2484d6c09c" }, function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Successfully deleted document");
   }
-);
+});
