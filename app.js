@@ -6,38 +6,27 @@ mongoose.connect("mongodb://localhost:27017/waterDB", {
 });
 
 const waterSchema = new mongoose.Schema({
-  name: String,
-  rating: Number,
+  name: {
+    type: String,
+    required: [true, "Water needs a name"],
+  },
+  rating: {
+    type: Number,
+    min: 1,
+    max: 10,
+  },
   review: String,
 });
 
 const Water = mongoose.model("Water", waterSchema);
 
-const life = new Water({
-  name: "Life",
-  rating: 8,
-  review: "Really good water",
+const water = new Water({
+  // name: "Evian",
+  rating: 7,
+  review: "It's an good water",
 });
 
-const ozark = new Water({
-  name: "Ozark",
-  rating: 6,
-  review: "Decent water",
-});
-
-const core = new Water({
-  name: "Core",
-  rating: 9,
-  review: "The water is amazing",
-});
-
-// Water.insertMany([life, ozark, core], function (err) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log("Saved all waters to waterDB");
-//   }
-// });
+water.save();
 
 Water.find(function (err, waters) {
   if (err) {
