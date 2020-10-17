@@ -20,13 +20,13 @@ const waterSchema = new mongoose.Schema({
 
 const Water = mongoose.model("Water", waterSchema);
 
-const water = new Water({
-  // name: "Evian",
-  rating: 7,
-  review: "It's an good water",
-});
+// const water = new Water({
+//   name: "Evian",
+//   rating: 7,
+//   review: "It's an good water",
+// });
 
-water.save();
+// water.save();
 
 Water.find(function (err, waters) {
   if (err) {
@@ -39,3 +39,15 @@ Water.find(function (err, waters) {
     });
   }
 });
+
+Water.updateOne(
+  { _id: "5f8b16e2eb32fa2484d6c09c" },
+  { name: "Nestle" },
+  function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Successfully updated the document");
+    }
+  }
+);
