@@ -52,10 +52,18 @@ Water.find(function (err, waters) {
 //   }
 // );
 
-Water.deleteOne({ _id: "5f8b16e2eb32fa2484d6c09c" }, function (err) {
+// Water.deleteOne({ _id: "5f8b16e2eb32fa2484d6c09c" }, function (err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Successfully deleted document");
+//   }
+// });
+
+Water.deleteMany({ name: "Evian" }, function (err) {
   if (err) {
     console.log(err);
   } else {
-    console.log("Successfully deleted document");
+    console.log("Successfully deleted documents");
   }
 });
