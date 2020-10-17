@@ -22,6 +22,15 @@ const waterSchema = new mongoose.Schema({
 
 const Water = mongoose.model("Water", waterSchema);
 
+// saves a new water to collection
+const smart = new Water({
+  name: "Smart",
+  rating: 8,
+  review: "A really tasty water",
+});
+
+smart.save();
+
 //schema for taster collection
 const tasterSchema = new mongoose.Schema({
   name: {
@@ -29,26 +38,19 @@ const tasterSchema = new mongoose.Schema({
     required: [true, "Taster needs a name"],
   },
   age: Number,
+  favoriteWater: waterSchema,
 });
 
 const Taster = mongoose.model("Taster", tasterSchema);
 
 //saves a new taster to collection
-// const taster = new Taster({
-//   name: "Joe",
-//   age: 21,
-// });
+const taster = new Taster({
+  name: "Mike",
+  age: 23,
+  favoriteWater: smart,
+});
 
-// taster.save();
-
-//saves a new water to collection
-// const water = new Water({
-//   name: "Evian",
-//   rating: 7,
-//   review: "It's an good water",
-// });
-
-// water.save();
+taster.save();
 
 //finds the collection of waters
 // Water.find(function (err, waters) {
@@ -94,10 +96,10 @@ const Taster = mongoose.model("Taster", tasterSchema);
 //   }
 // });
 
-Taster.deleteMany({ name: "Joe" }, function (err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Successfully deleted documents");
-  }
-});
+// Taster.deleteMany({ name: "Joe" }, function (err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Successfully deleted documents");
+//   }
+// });
